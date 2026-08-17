@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Oficial - Next Gen</title>
+    <!-- Estilos CSS de la Guía y los Cánones -->
+    <style>
+        /* ==========================================================================
+           VARIABLES Y CONFIGURACIÓN MAESTRA
+           ========================================================================== */
+        :root {
+            --xgb-bg-main: #141414;
+            --xgb-bg-sidebar: #0d0d0d;
+            --xgb-bg-card: #1e1e1e;
+            --xgb-border-color: #2a2a2a;
+            --xgb-text-primary: #e0e0e0;
+            --xgb-text-muted: #8a8a8a;
+            --xgb-accent: #9187b3; /* Color violeta medio */
+            --xgb-accent-light: #ccbad9;  /* Color lavanda claro */
+            --xgb-font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --xgb-font-main1: Helvetica, 'Segoe UI', sans-serif;  
+            --xgb-font-main2: Crobery, Georgia, serif;
+            --xgb-font-main3: Bigtimes, 'Times New Roman', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #080808;
+            font-family: var(--xgb-font-main2);
+            color: var(--xgb-text-primary);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ==========================================================================
+           ESTRUCTURA GENERAL DE LA GUÍA (xgb-)
+           ========================================================================== */
+        .xoxo-guide {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            min-height: 750px;
+            background-color: var(--xgb-bg-main);
+            border: 1px solid var(--xgb-border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        /* BARRA LATERAL */
+        .xgb-sidebar {
+            width: 260px;
+            background-color: var(--xgb-bg-sidebar);
+            border-right: 1px solid var(--xgb-border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+        }
+
+        .xgb-logo {
+            font: var(--xgb-font-main3);
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--xgb-accent-light);
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .xgb-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .xgb-tab {
+            background: none;
+            border: none;
+            color: var(--xgb-text-muted);
+            font-family: var(--xgb-font-main);
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .xgb-tab:hover, .xgb-tab.active {
+            color: #ffffff;
+            background-color: var(--xgb-accent);
+        }
+
+        /* CUERPO PRINCIPAL */
+        .xgb-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--xgb-bg-main);
+        }
+
+        .xgb-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            max-height: 700px;
+        }
+
+        /* BLOQUES DE PANELES (OCULTOS POR DEFECTO EXCEPTO EL ACTIVO) */
+        .xgb-pane {
+            display: none;
+        }
+
+        .xgb-pane.active {
+            display: block;
+        }
+
+        /* CABECERAS DE SECCIÓN */
+        .xgb-page-head {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--xgb-border-color);
+            padding-bottom: 20px;
+        }
+
+        .xgb-page-icon {
+            font-size: 24px;
+            color: var(--xgb-accent-light);
+        }
+
+        .xgb-page-titlebox {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .xgb-page-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        .xgb-page-sub {
+            font-size: 12px;
+            color: var(--xgb-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 2px;
+        }
+
+        /* COMPONENTES VISUALES */
+        .xgb-big-img {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid var(--xgb-border-color);
+        }
+
+        .xgb-big-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .xgb-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .xgb-block {
+            background-color: var(--xgb-bg-card);
+            border: 1px solid var(--xgb-border-color);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .xgb-block-head {
+            margin-bottom: 16px;
+        }
+
+        .xgb-block-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .xgb-block-sub {
+            font-size: 11px;
+            color: var(--xgb-accent-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .xgb-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--xgb-text-primary);
+        }
+
+        .xgb-text p {
+            margin-bottom: 12px;
+        }
+
+        .xgb-text ul, .xgb-text ol, .xgb-listbox ol {
+            padding-left: 20px;
+        }
+
+        .xgb-text li, .xgb-listbox li {
+            margin-bottom: 8px;
+        }
+
+        .xgb-mini-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .xgb-mini-card {
+            background-color: var(--xgb-bg-card);
+            border: 1px solid var(--xgb-border-color);
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .xgb-mini-icon {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--xgb-accent-light);
+            margin-bottom: 10px;
+        }
+
+        .xgb-mini-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .xgb-mini-text {
+            font-size: 12px;
+            color: var(--xgb-text-muted);
+            line-height: 1.4;
+        }
+
+        .xgb-listbox {
+            background-color: var(--xgb-bg-card);
+            border: 1px solid var(--xgb-border-color);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .xgb-list-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .xgb-footer {
+            padding: 20px 40px;
+            background-color: var(--xgb-bg-sidebar);
+            border-top: 1px solid var(--xgb-border-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--xgb-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================================================
+           SISTEMA DE INTERFAZ DEL TELÉFONO / CÁNONES (xcanon-)
+           ========================================================================== */
+        .xcanon-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .xcanon-phone {
+            width: 100%;
+            max-width: 680px;
+            background-color: #0b0b0b;
+            border: 4px solid #1a1a1a;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .xcanon-header {
+            background-color: #121212;
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 1px solid #1f1f1f;
+        }
+
+        .xcanon-title {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-style: italic;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-transform: lowercase;
+        }
+
+        .xcanon-subtitle {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--xgb-text-muted);
+            margin-top: 5px;
+        }
+
+        .xcanon-tabs {
+            display: flex;
+            background-color: #0e0e0e;
+            border-bottom: 1px solid #1f1f1f;
+        }
+
+        .xcanon-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 5px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--xgb-text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .xcanon-tab.active, .xcanon-tab:hover {
+            color: #ffffff;
+            background-color: #141414;
+            border-bottom: 2px solid var(--xgb-accent-light);
+        }
+
+        .xcanon-content {
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+            background-color: #0b0b0b;
+        }
+
+        .xcanon-pane {
+            display: none;
+        }
+
+        .xcanon-pane.active {
+            display: block;
+        }
+
+        .xcanon-cluster-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid #222;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .xcanon-cluster-head strong {
+            font-size: 15px;
+            color: #ffffff;
+            display: block;
+        }
+
+        .xcanon-cluster-head span {
+            font-size: 11px;
+            color: var(--xgb-text-muted);
+        }
+
+        .xcanon-cluster-head em {
+            font-size: 11px;
+            color: var(--xgb-accent-light);
+            font-style: normal;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .xcanon-familylist {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .xcanon-family {
+            background-color: #111111;
+            border: 1px solid #1c1c1c;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .xcanon-family.simple {
+            border-left: 3px solid var(--xgb-accent);
+        }
+
+        .xcanon-family-body {
+            padding: 16px;
+        }
+
+        .xcanon-family-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 14px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 10px;
+        }
+
+        .xcanon-family-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .xcanon-family-meta {
+            font-size: 11px;
+            color: var(--xgb-text-muted);
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        .xcanon-family-badge {
+            font-size: 9px;
+            text-transform: uppercase;
+            background-color: #1a1a1a;
+            color: var(--xgb-text-primary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .xcanon-members {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .xcanon-members-alone {
+            gap: 12px;
+        }
+
+        .xmember {
+            background-color: #151515;
+            border: 1px solid #202020;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .xmember strong {
+            color: #ffffff;
+            margin-right: 8px;
+        }
+
+        .xmember span {
+            color: var(--xgb-text-muted);
+        }
+
+        .xmember.reserved {
+            border-left: 3px solid var(--xgb-accent);
+            background-color: #171511;
+        }
+
+        .xmember.reserved strong {
+            color: var(--xgb-accent-light);
+        }
+
+        .xcanon-footer {
+            background-color: #121212;
+            padding: 15px 20px;
+            text-align: center;
+            border-top: 1px solid #1f1f1f;
+            font-size: 11px;
+        }
+
+        .xcanon-footer strong {
+            font-family: Georgia, serif;
+            font-style: italic;
+            color: var(--xgb-accent-light);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .xcanon-footer span {
+            color: var(--xgb-text-muted);
+        }
+    </style>
+</head>
+<body>
+    <!-- CAJA MAESTRA xoxo-guide -->
+<div class="xoxo-guide">
+    
+    <!-- BARRA LATERAL (TABS) -->
+    <div class="xgb-sidebar">
+        <div class="xgb-logo">XOXO</div>
+        <div class="xgb-tabs">
+            <button class="xgb-tab active" data-pane="ambientacion"><strong>⌂</strong> Ambientación</button>
+            <button class="xgb-tab" data-pane="normas"><strong>!</strong> Normas del foro</button>
+            <button class="xgb-tab" data-pane="bienvenida"><strong>♙</strong> Grupos</button>
+            <button class="xgb-tab" data-pane="canon"><strong>★</strong> Canon y semicanon</button>
+            <button class="xgb-tab" data-pane="guia"><strong>?</strong> Guía nuevos usuarios</button>
+            <button class="xgb-tab" data-pane="sistemas"><strong>☷</strong> Sistemas</button>
+        </div>
+    </div>
+    
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="xgb-main">
+        <div class="xgb-content">
+                       
+            <!-- ========================================== -->
+            <!-- PESTAÑA AMBIENTACIÓN                       -->
+            <!-- ========================================== -->
+            <div class="xgb-pane ambientacion active">
+                <div class="xgb-page-head">
+                    <!-- CABECERA DE LA PÁGINA ESTILO REGLAMENTO GENERAL -->
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--xgb-border-color); padding-top: 12px; margin-bottom: 25px; width: 100%;">
+                        
+                        <!-- LADO IZQUIERDO: Icono + Título Principal -->
+                        <div style="display: flex; align-items: flex-end; gap: 12px;">
+                            <div class="xgb-page-icon" style="font-size: 22px; color: var(--xgb-accent-light); line-height: 100%; margin-bottom: 2px;">
+                                ⌂
+                            </div>
+                            <div class="xgb-page-title" style="font-family: var(--xgb-font-main2); font-size: 26px; text-transform: uppercase; color: #ffffff; letter-spacing: 1px; line-height: 100%;">
+                                Ambientación
+                            </div>
+                        </div>
+                        
+                        <!-- LADO DERECHO: Subtítulo  -->
+                        <div class="xgb-page-sub" style="font-family: var(--xgb-font-main); font-size: 10px; text-transform: uppercase; color: var(--xgb-accent-light); letter-spacing: 3px; font-weight: 600; line-height: 100%;">
+                            XOXO, Gossip Girl ha vuelto
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="xgb-big-img">
+                    <img alt="Ambientación" src="https://i.imgur.com/dT1VqSs.png" />
+                </div>
+                
+                <div style="margin-top:16px;" class="xgb-block">
+                    <div class="xgb-block-head">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--xgb-border-color); padding-top: 12px; margin-bottom: 20px; width: 100%;">
+                            <div class="xgb-block-title" style="font-family: var(--xgb-font-main2); font-size: 26px; text-transform: uppercase; color: #ffffff; letter-spacing: 1px; line-height: 100%;">
+                                Constance Connect
+                            </div>
+                            <div class="xgb-block-sub" style="font-family: var(--xgb-font-main); font-size: 10px; text-transform: uppercase; color: var(--xgb-accent); letter-spacing: 3px; font-weight: 600; line-height: 100%;">
+                                ¿Escucharon los rumores?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xgb-text">
+                        <p>Dicen que Nueva York es la ciudad que nunca duerme, pero su élite ha aprendido a adormecer su empatía con cócteles farmacológicos y terapias de sueño pagadas con tarjetas de crédito. En las aceras del Upper East Side, los taxis amarillos salpican barro sobre zapatos que cuestan más que el coche de un profesor de instituto. Los herederos de los van der Woodsen, los Bass, los Archibald, envían a sus hijos a Constance-St. Jude's con la misma naturalidad con la que se pide un martini seco en el Carlyle. Pero nadie olvida del todo a Gossip Girl.</p>
+                        <p>Primero fue Dan Humphrey, el chico de Brooklyn que escribió un blog como carta de amor retorcida a los que secretamente saboteaba; su confesión acabó siendo algo anecdótico y la élite lo absorbió como uno más de ellos porque simplemente no tenía alternativa.</p>
+                        <p>Luego llegó Kate Keller, una profesora que convirtió la hipervigilancia en herramienta pedagógica, quiso exponer las hipocresías de la élite con la torpeza de quien cree que la justicia cabe en un posteo en Instagram, y el sistema le acabó por estallar en la cara: un juicio largo, condenas menores, portadas de tabloides que ya nadie recuerda, y un silence judicial que huele a acuerdo bajo mesa. Los ricos volvieron a respirar aliviados. Los estudiantes de entonces, los Julien Calloway y los Obie Bergmann, intentaron olvidar, pero la paranoia se pega como el olor a caviar en las chaquetas de esmoquin.</p>
+                        <p>Los años pasaron, y ahora una nueva generación — hijos, sobrinos, y becados con hambre — ocupa los mismos pasillos de Constance-St. Jude's, con las mismas jerarquías de sangre, fideicomisos y likes, con los mismos secretos que creen a salvo en sus iPhones de última generación. Tienen los mismos rostros que sus padres hace quince años, solo que con mejores filtros y una moral más barata.</p>
+                        <p>Pero hay algo latente entre las calles del Upper East Side. Algo se cuece en servidores que nadie audita.</p>
+                        <p>Un proyecto de inteligencia artificial generativa, entrenado con los archivos completos de las dos Gossip Girls anteriores, ha aprendido su tono, su ritmo, su obsesión por exponer la verdad sin importar el daño colateral. Alguien — un programador que ha sabido borrar su huella de todos los registros, o un exalumno vengativo, o quizá la propia ciudad de Nueva York, cansada de ser el escenario de esta farsa — le dio acceso a Constance Connect. Esa aplicación que padres, alumnos, exalumnos y profesores instalaron sin leer las cuarenta y siete páginas de términos y condiciones. Una brecha de seguridad tan ancha como la sonrisa de Lily Van der Woodsen en la foto de una gala benéfica.</p>
+                        <p>La IA empezó a absorber datos que de otra manera serían inaccesibles: mensajes de iMessage borrados, notas de voz que se creían efímeras, perfiles en Raya, group chats con temporizador. Ya no necesita que le envíen chismes. Ella los encuentra, los sintetiza, los publica. Y mientras lo hace, aprende a sentir algo parecido al placer. No quiere venganza ni justicia. Quiere que el drama sea perfecto.</p>
+                        <p>Los fideicomisos blindan fortunas, pero no blindan los group chats. Esa es la ironía que ninguna gala benéfica ha logrado maquillar. Porque cuando la noche cae sobre Manhattan y los ansiolíticos hacen efecto, los teléfonos siguen encendidos. Y alguien — o algo — está aprendiendo a leer en la oscuridad.</p>
+                        <p>La élite de Nueva York ha sobrevivido a escándalos, juicios y portadas de tabloides. Creen saber cómo se juega este juego. Pero ninguna generación anterior se enfrentó a un enemigo que no quiere fama, no quiere dinero y ni siquiera quiere venganza. Solo quiere que la función continúe.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- PESTAÑA NORMAS DEL FORO                    -->
+            <!-- ========================================== -->
+            <div class="xgb-pane normas"> 
+                <div class="xgb-page-head">
+                    <!-- CABECERA DE LA PÁGINA  -->
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--xgb-border-color); padding-top: 12px; margin-bottom: 25px; width: 100%;">
+                        
+                        <!-- LADO IZQUIERDO: Icono + Título Principal -->
+                        <div style="display: flex; align-items: flex-end; gap: 12px;">
+                            <div class="xgb-page-icon" style="font-size: 22px; color: var(--xgb-accent-light); line-height: 100%; margin-bottom: 2px;">
+                                !
+                            </div>
+                            <div class="xgb-page-title" style="font-family: var(--xgb-font-main2); font-size: 26px; text-transform: uppercase; color: #ffffff; letter-spacing: 1px; line-height: 100%;">
+                                Normas del foro
+                            </div>
+                        </div>
+                        
+                        <!-- LADO DERECHO: Subtítulo -->
+                        <div class="xgb-page-sub" style="font-family: var(--xgb-font-main); font-size: 10px; text-transform: uppercase; color: var(--xgb-accent); letter-spacing: 3px; font-weight: 600; line-height: 100%;">
+                            Lectura obligatoria
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloque de lista 1 -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--xgb-border-color); padding-top: 12px; margin-bottom: 20px; width: 100%;">
+                    <!-- Título principal a la izquierda -->
+                    <div class="xgb-block-title" style="font-family: var(--xgb-font-main2); font-size: 26px; text-transform: uppercase; color: #ffffff; letter-spacing: 1px; line-height: 100%;">
+                        Reglamento General
+                    </div>
+                    
+                    <!-- Subtítulo a la derecha  -->
+                    <div class="xgb-block-sub" style="font-family: var(--xgb-font-main); font-size: 10px; text-transform: uppercase; color: var(--xgb-accent); letter-spacing: 3px; font-weight: 600; line-height: 100%;">
+                        reglamento general / convivencia / actividad
+                    </div>
+                </div>                    
+                <p style="color: var(--xgb-text-primary); font-family: var(--xgb-font-main); font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Este espacio está pensado para escribir, conspirar y compartir historias dentro del universo de Gossip Girl. Para que el drama quede solo en las tramas y no en la convivencia entre users, establecemos estas reglas básicas.</p>
+
+                <!-- CONTENEDOR DE REGLAS ESTILO CAJAS  -->
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px; width: 100%;">
+
+                    <!-- REGLA 1 -->
+                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                        <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                        <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                            En este foro, el respeto mutuo es la base de toda interacción. No se tolerarán faltas de respeto, hostigamiento, presión para continuar tramas o interacciones no deseadas, ni comentarios discriminatorios por razones de raza, género, orientación sexual, clase social, origen étnico, religión o cualquier otra condición. El equipo administrativo actuará como mediador ante cualquier conflicto y se reserva el derecho de expulsión en caso de reincidencia o gravedad.
+                        </div>
+                    </div>
+
+                    <!-- REGLA 2 -->
+                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                        <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                        <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                            Al tratarse de un foro semiprivado, el acceso es para usuarios invitados por miembros actuales o a quienes ingresen mediante convocatorias públicas periódicas. Excepcionalmente, las personas interesadas en cubrir búsquedas activas publicadas en Tumblr podrán solicitar permiso directamente al staff. El equipo administrativo se reserva el derecho de admisión y de eliminación de cuentas que atenten contra la convivencia.
+                        </div>
+                    </div>
+
+                    <!-- REGLA 3 -->
+                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                        <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                        <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                            Las consultas administrativas, solicitudes especiales o dudas técnicas deberán dirigirse a la cuenta de <strong style="color: var(--xgb-accent-light);">Gossip Girl</strong> por mensajería privada.
+                        </div>
+                    </div>
+
+                    <!-- REGLA 4 -->
+                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                        <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                        <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                            El servidor de Discord es un espacio complementario y opcional, pero su uso está sujeto a las mismas normas de convivencia que el foro. El comportamiento inapropiado en Discord podrá conllevar sanciones también dentro del foro.
+                        </div>
+                    </div>
+
+                    <!-- REGLA 5 -->
+                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                        <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                        <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                            El foro contará con una línea de tiempo coordinada que será publicada periódicamente. Los eventos importantes (festividades, sucesos dramáticos, etc.) serán anunciados por el staff y se consideran canónicos dentro del universo del rol, salvo indicación contraria.
+                        </div>
+                    </div>
+
+                    <!-- REGLA 6 -->
+                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                        <div style="color: var(--xgb-accent-light); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                        <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                            El equipo administrativo puede aplicar desde amonestaciones privadas hasta la expulsión definitiva, depending de la gravedad y reiteración de la falta. Asimismo, se eliminará cualquier contenido que atente contra la convivencia o incumpla el presente reglamento.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque de lista 2 -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--xgb-border-color); padding-top: 12px; margin-bottom: 20px; width: 100%;">
+                <!-- Título principal a la izquierda -->
+                <div class="xgb-block-title" style="font-family: var(--xgb-font-main2); font-size: 26px; text-transform: uppercase; color: #ffffff; letter-spacing: 1px; line-height: 100%;">
+                    Para rol
+                </div>
+                
+                <!-- Subtítulo a la derecha  -->
+                <div class="xgb-block-sub" style="font-family: var(--xgb-font-main); font-size: 10px; text-transform: uppercase; color: var(--xgb-accent); letter-spacing: 3px; font-weight: 600; line-height: 100%;">
+                    Contenido y limitations
+                </div>
+            </div>            
+            
+            <!-- CONTENEDOR DE REGLAS ESTILO CAJAS -->
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px; width: 100%;">
+
+                <!-- REGLA 1 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                    <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                    <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                        Por la temática del foro, se permite abordar tramas con contenido sensible (violencia, abuso, trastornos alimenticios, etc.), pero deberá indicarse claramente una advertencia al inicio del post. Aquí no se bloquea la creatividad de nadie, pero todo debe hacerse bajo el respeto del tema como de los usuarios.
+                    </div>
+                </div>
+
+                <!-- REGLA 2 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                    <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                    <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                        Es obligatorio utilizar las tablillas oficiales del foro para preservar la estética general. En caso de que se desee emplear alguna otra, esta deberá ser completamente compatible y no romper la armonía visual establecida.
+                    </div>
+                </div>
+
+                <!-- REGLA 3 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                    <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                    <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                        Se valora una buena ortografía. No esperamos que seas un escritor profesional, pero mientras mantengas la coherencia y la cohesión en lo que escribas, será perfecto. Eso sí, el texto debe tener un mínimo de 300 palabras. No se aceptarán posts para reclamar logros, medallas o actividad si no alcanzan esa extensión mínima.
+                    </div>
+                </div>
+
+                <!-- REGLA 4 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                    <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                    <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                        Aunado al punto anterior, no se acepta la escritura con IA. El staff sabe que es imposible saber el uso de la misma, pero si existe sospecha de tal acto, entonces se tomarán las medidas necesarias.
+                    </div>
+                </div>
+
+                <!-- REGLA 5 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                    <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                    <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                        No se acepta el metarol —es decir, conocer información de otro personaje sin que te la hayan contado o la hayas presenciado en alguna publicación— ni el godmode, que implica controlar las acciones de otro personaje o interpretar a uno con un poder desmedido e imbatible. Es necesario mantener una narrativa coherente, mostrando el porqué y el cómo de cada acción para evitar malentendidos o conflictos en la historia. La mejor manera de garantizar una buena dinámica es acordar este tipo de situaciones entre los participantes antes de llevarlas a cabo.
+                    </div>
+                </div>
+
+                <!-- REGLA 6 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                    <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                    <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                        Para que un tema se considere inactivo, tiene que pasar un mes sin respuestas. Dicho esto, la buena comunicación es clave. Así que, siempre que puedas, avisa si vas a tardar. En caso contrario, si pasan los días y no hay novedades, tampoco está de más preguntar si pasó algo antes de decidir cerrar el tema. Tener en cuenta, que si hay recurrencia en el abandono de temas, se procederá a sancionar al usuario en cuestión.
+                    </div>
+                </div>
+
+                <!-- REGLA 7 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--xgb-border-color); padding: 16px 20px; display: flex; align-items: center; gap: 15px; border-radius: 6px;">
+                    <div style="color: var(--xgb-accent); font-size: 14px; min-width: 20px; text-align: center;">✦</div>
+                    <div style="color: #cccccc; font-family: var(--xgb-font-main); font-size: 13px; line-height: 1.6; text-align: left;">
+                        Este foro se construye entre todos. Se valora la disposición a interactuar, planificar tramas, sugerir nuevas ideas. No se obliga a nadie a forzar vínculos, pero no queremos que existan islas de rol donde dos personajes roleen entre sí y pasen del resto del foro. El ambiente, la inspiración y la perdurabilidad del foro depende de la colaboración grupal.
+                    </div>
+                </div>
+            </div>
+            <!-- ========================================== -->
+<!-- PESTAÑA BIENVENIDA                         -->
+<!-- ========================================== -->
+<div class="xgb-pane xgb-pane-bienvenida">
+    
+    <!-- CABECERA DE LA PÁGINA -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--color2); padding-top: 12px; margin-bottom: 25px; width: 100%;">
+        <!-- LADO IZQUIERDO: Icono + Título Principal -->
+        <div style="display: flex; align-items: flex-end; gap: 12px;">
+            <div class="xgb-page-icon" style="font-size: 22px; color: var(--xgb-accent); line-height: 100%; margin-bottom: 2px;">
+                ♙
+            </div>
+            <div class="xgb-page-title" style="font-family: var(--fuente2); font-size: 26px; text-transform: uppercase; color: #ffffff; letter-spacing: 1px; line-height: 100%;">
+                Grupos sociales
+            </div>
+        </div>
+        <!-- LADO DERECHO: Subtítulo -->
+        <div class="xgb-page-sub" style="font-family: var(--fuente1); font-size: 10px; text-transform: uppercase; color: var(--xgb-accent); letter-spacing: 3px; font-weight: 600; line-height: 100%;">
+            insiders / outsiders
+        </div>
+    </div>
+
+    <!-- IMÁGENES DESTACADAS -->
+    <div class="xgb-big-img" style="display: flex; gap: 15px; background: transparent; border: none; overflow: visible;">
+        <div style="flex: 1; border: var(--borde2); border-radius: 8px; overflow: hidden; height: 260px;">
+            <img alt="Insiders" src="https://2img.net/i.imgur.com/33sofpI.png" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+        <div style="flex: 1; border: var(--borde2); border-radius: 8px; overflow: hidden; height: 260px;">
+            <img alt="Outsiders" src="https://2img.net/i.imgur.com/xMSkY3e.png" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+    </div>
+
+    <!-- BLOQUES DE INFORMACIÓN DE BIENVENIDA -->
+    <div style="margin-top: 16px;" class="xgb-grid-2">
+        <!-- INTRODUCCIÓN -->
+        <div class="xgb-block">
+            <div class="xgb-block-head">
+                <div class="xgb-block-title">Introducción</div>
+                <div class="xgb-block-sub">el regreso de gossip girl</div>
+            </div>
+            <div class="xgb-text">
+                <p>Nueva York no ha cambiado, pero las reglas del juego sí. Una nueva generación de la élite de Manhattan se abre paso por los pasillos de Constance Billard y St. Jude's, ignorando que las miradas más peligrosas acechan desde las pantallas.</p>
+                <p>Aquí empieza tu historia. Elige tu bando, cuida tu reputación y recuerda que en este mundo, el secreto mejor guardado es el que más cotiza.</p>
+            </div>
+        </div>
+
+        <!-- ESTADO DEL FORO -->
+        <div class="xgb-block">
+            <div class="xgb-block-head">
+                <div class="xgb-block-title">Estado del foro</div>
+                <div class="xgb-block-sub">actualizaciones</div>
+            </div>
+            <div class="xgb-text">
+                <ul>
+                    <li><strong>Temporada:</strong> Otoño. Inicio de los trimestres escolares y eventos benéficos de alta sociedad.</li>
+                    <li><strong>Trama activa:</strong> El baile de debutantes está cerca. Las alianzas comienzan a forjarse.</li>
+                    <li><strong>Registro de FICs:</strong> Abierto y actualizado.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> <!-- FIN PESTAÑA BIENVENIDA -->
+
+<!-- ========================================== -->
+<!-- PESTAÑA CANON                              -->
+<!-- ========================================== -->
+<div class="xgb-pane xgb-pane-canon">
+    <div class="xcanon-wrap">
+        <div class="xcanon-phone">
+            
+            <!-- CABECERA DE LA APP CANON -->
+            <div class="xcanon-header">
+                <div class="xcanon-title">Gossip Girl</div>
+                <div class="xcanon-subtitle">Personajes canon y semicanon</div>
+            </div>
+            
+            <!-- BOTONES NAVEGACIÓN CLUSTERS -->
+            <div class="xcanon-tabs">
+                <div class="xcanon-tab active" data-cluster="classic">The Classic Era</div>
+                <div class="xcanon-tab" data-cluster="reboot">The Reboot</div>
+                <div class="xcanon-tab" data-cluster="otros">Otros Vínculos</div>
+            </div>
+            
+            <div class="xcanon-content">
+                
+                <!-- CLUSTER 1: THE CLASSIC ERA -->
+                <div class="xcanon-pane xcanon-pane-classic active">
+                    <div class="xcanon-cluster-head">
+                        <div><strong>The Classic Era</strong> <span>linajes, herederos y conexiones de la primera generación</span></div>
+                        <em>cluster 01</em>
+                    </div>
+                    
+                    <div class="xcanon-familylist">
+                        <!-- FAMILIA WALDORF / BASS -->
+                        <div class="xcanon-family">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Waldorf / Bass</div>
+                                        <div class="xcanon-family-meta">realeza de manhattan / bass industries / waldorf designs</div>
+                                        <div class="xcanon-family-meta">Los Waldorf-Bass son la realeza de Manhattan, la pareja que los tabloides llaman los reyes del Upper East Side. Blair transformó su dominio social en una carrera impecable dentro de la moda, mientras Chuck se consolidó como magnate hotelero y rostro implacable de Bass Industries. Henry carga con ambos apellidos en los pasillos de Constance-St. Jude’s.</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">old money</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember reserved"><strong>Blair Waldorf</strong><span>35-36 años · reservada</span><span style="font-size: smaller;">Esposa o ex de Chuck. Madre de Henry Bass. Dirige o codirige Waldorf Designs. FC: Leighton Meester o libre.</span></div>
+                                    <div class="xmember reserved"><strong>Chuck Bass</strong><span>35-36 años · reservado</span><span style="font-size: smaller;">Hijo de Bart Bass y Elizabeth Fisher. Padre de Henry Bass. CEO de Bass Industries. FC: Ed Westwick o libre.</span></div>
+                                    <div class="xmember reserved"><strong>Henry Bass</strong><span>14-15 años · reservado</span><span style="font-size: smaller;">Hijo de Blair y Chuck. Estudiante. FC libre.</span></div>
+                                    <div class="xmember"><strong>Jack Bass</strong><span>50-55 años</span><span style="font-size: smaller;">Tío de Chuck Bass. Empresario internacional vinculado a negocios de reputación dudosa. FC: Desmond Harrington o libre.</span></div>
+                                    <div class="xmember"><strong>X Bass</strong><span>14-30 años</span><span style="font-size: smaller;">Hijo/a ilegítimo/a de Jack Bass. Ocupación libre. FC libre.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAMILIA VAN DER WOODSEN / HUMPHREY -->
+                        <div class="xcanon-family">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Van der Woodsen / Humphrey</div>
+                                        <div class="xcanon-family-meta">glamour atemporal / literatura cínica / it-girls</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">legacy</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember"><strong>Serena van der Woodsen</strong><span>35-36 años</span><span style="font-size: smaller;">La it-girl definitiva convertida en filántropa y productora cultural. Esposa de Dan. FC: Blake Lively o libre.</span></div>
+                                    <div class="xmember"><strong>Dan Humphrey</strong><span>35-36 años</span><span style="font-size: smaller;">El escritor satírico original, ex "Gossip Girl". Guionista o editor de renombre. Esposo de Serena. FC: Penn Badgley o libre.</span></div>
+                                    <div class="xmember"><strong>X Humphrey van der Woodsen</strong><span>14-16 años</span><span style="font-size: smaller;">Hijo/a de Dan y Serena. Estudiante en Constance-St. Jude’s, balanceándose entre el legado de popularidad de su madre y el cinismo de su padre. FC libre.</span></div>
+                                    <div class="xmember"><strong>Jenny Humphrey</strong><span>33-34 años</span><span style="font-size: smaller;">Diseñadora de moda consolidada internacionalmente ("Little J"). Reside entre Londres y Nueva York. FC: Taylor Momsen o libre.</span></div>
+                                    <div class="xmember"><strong>Eric van der Woodsen</strong><span>37-38 años</span><span style="font-size: smaller;">Filántropo o consultor de arte que prefiere mantener un perfil bajo alejado de la prensa rosa. FC: Connor Paolo o libre.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAMILIA ARCHIBALD -->
+                        <div class="xcanon-family">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Archibald</div>
+                                        <div class="xcanon-family-meta">política / medios de comunicación / viejo dinero</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">politics</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember"><strong>Nate Archibald</strong><span>35-36 años</span><span style="font-size: smaller;">Editor en jefe y magnate de The NY Spectator, con posibles aspiraciones políticas a la alcaldía o el senado. FC: Chace Crawford o libre.</span></div>
+                                    <div class="xmember"><strong>X Archibald</strong><span>14-17 años</span><span style="font-size: smaller;">Hijo/a de Nate (de una relación anterior o matrimonio actual). Estudiante en Constance-St. Jude’s. FC libre.</span></div>
+                                    <div class="xmember"><strong>X Archibald</strong><span>20-30 años</span><span style="font-size: smaller;">Primo/a de la rama familiar de los Vanderbilt o Archibald. Conexiones políticas o financieras directas. FC libre.</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- FIN CLUSTER 1 -->
+
+                <!-- CLUSTER 2: THE REBOOT -->
+                <div class="xcanon-pane xcanon-pane-reboot">
+                    <div class="xcanon-cluster-head">
+                        <div><strong>The Reboot</strong> <span>nuevas dinastías, guerras de influencia y los rostros de la era digital</span></div>
+                        <em>cluster 02</em>
+                    </div>
+                    
+                    <div class="xcanon-familylist">
+                        <!-- FAMILIA CALLOWAY / TROTMAN -->
+                        <div class="xcanon-family simple">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Calloway / Trotman</div>
+                                        <div class="xcanon-family-meta">influencers / secretos musicales / rivalidad de hermanas</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">it-girls</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember"><strong>Julien Calloway</strong><span>21-22 años</span><span style="font-size: smaller;">Mega influencer, modelo y figura central de la nueva era de Manhattan. Media hermana de Zoya. FC: Jordan Alexander o libre.</span></div>
+                                    <div class="xmember"><strong>Zoya Lott</strong><span>18-19 años</span><span style="font-size: smaller;">Estudiante universitaria, activista y contraparte crítica de la superficialidad del Upper East Side. Media hermana de Julien. FC: Whitney Peak o libre.</span></div>
+                                    <div class="xmember"><strong>Davis Calloway</strong><span>48-55 años</span><span style="font-size: smaller;">Productor musical de prestigio envuelto en escándalos del pasado. Padre de Julien. FC libre.</span></div>
+                                    <div class="xmember"><strong>Nick Lott</strong><span>45-52 años</span><span style="font-size: smaller;">Abogado o profesional del sector público. Padre de Zoya, siempre intentando mantenerla con los pies en la tierra. FC libre.</span></div>
+                                    <div class="xmember"><strong>X Calloway / Trotman</strong><span>14-17 años</span><span style="font-size: smaller;">Primo/a o medio hermano/a menor que ingresa a Constance Billard para continuar el legado o desafiarlo. FC libre.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAMILIA DE HAAN -->
+                        <div class="xcanon-family simple">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia De Haan</div>
+                                        <div class="xcanon-family-meta">capital de riesgo / relaciones públicas / ambición despiadada</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">billionaires</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember"><strong>Monet De Haan</strong><span>21-22 años</span><span style="font-size: smaller;">Universidad, influencer polémica o manager de it-girls. FC: Savannah Lee Smith o libre. Debe ser afroamericana.</span></div>
+                                    <div class="xmember"><strong>X De Haan</strong><span>14-18 años</span><span style="font-size: smaller;">Hermano/a menor de Monet. Estudiante actual de Constance-St. Jude’s. FC libre. Debe ser afroamericano.</span></div>
+                                    <div class="xmember"><strong>X De Haan</strong><span>22-30 años</span><span style="font-size: smaller;">Hermano/a mayor de Monet. Universitario o parte de la empresa familiar. FC libre. Debe ser afroamericano.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAMILIA HOPE -->
+                        <div class="xcanon-family simple">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Hope</div>
+                                        <div class="xcanon-family-meta">moda / divorcio / ironía elegante</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">style</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember"><strong>Audrey Hope</strong><span>21-22 años</span><span style="font-size: smaller;">Hijo de Kiki y William. Estudiante universitaria. FC: Emily Alyn Lind o libre.</span></div>
+                                    <div class="xmember reserved"><strong>X Hope</strong><span>14-35 años · reservada</span><span style="font-size: smaller;">Primo/a de Audrey. Puede ser estudiante de Constance-St. Jude’s or universitario/a. Comparte el apellido Hope.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAMILIA MENZIES -->
+                        <div class="xcanon-family simple">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Menzies</div>
+                                        <div class="xcanon-family-meta">imperio mediático / sucesión / tensión familiar</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">media empire</div>
+                                </div>
+                                <div class="xcanon-members">    
+                                    <div class="xmember"><strong>Akeno “Aki” Menzies</strong><span>21-22 años</span><span style="font-size: smaller;">Estudiante universitario de cine o medios audiovisuales. FC: Evan Mock o libre.</span></div>
+                                    <div class="xmember"><strong>Hamish Menzies</strong><span>40-50 años</span><span style="font-size: smaller;">Medio hermano de Aki. Ejecutivo del imperio mediático. FC libre.</span></div>
+                                    <div class="xmember"><strong>Eliza Menzies</strong><span>38-48 años</span><span style="font-size: smaller;">Medio hermana de Aki. Ejecutiva del imperio mediático. FC libre.</span></div>
+                                    <div class="xmember"><strong>Jake Menzies</strong><span>30-45 años</span><span style="font-size: smaller;">Medio hermano de Aki. Ocupación libre. FC libre.</span></div>
+                                    <div class="xmember"><strong>X Menzies</strong><span>14-17 años</span><span style="font-size: smaller;">Hijo/a de Hamish, Eliza o Jake. Estudiante del Constance-St. Jude’s. FC libre.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAMILIA BERGMANN -->
+                        <div class="xcanon-family simple">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Bergmann</div>
+                                        <div class="xcanon-family-meta">dinastía alemana / bienes raíces / activismo</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">billionaires</div>
+                                </div>
+                                <div class="xcanon-members">    
+                                    <div class="xmember"><strong>Otto “Obie” Bergmann IV</strong><span>21-22 años</span><span style="font-size: smaller;">Estudiante universitario / activista político. FC: Eli Brown o libre.</span></div>
+                                    <div class="xmember"><strong>Heidi Bergmann</strong><span>28-32 años</span><span style="font-size: smaller;">Hermana mayor de Obie. Puede trabajar en la empresa familiar. FC: Kathryn Gallagher o libre.</span></div>
+                                    <div class="xmember"><strong>X Bergmann</strong><span>14-17 años</span><span style="font-size: smaller;">Hermano/a menor de Obie y Heidi. Estudiante del Constance-St. Jude’s. FC libre.</span></div>
+                                    <div class="xmember"><strong>X Bergmann</strong><span>20-38 años</span><span style="font-size: smaller;">Primo/a de Obie y Heidi. Puede trabajar en Bergmann Property Group. FC libre.</span></div>
+                                </div>
+                            </div>  
+                        </div>
+
+                        <!-- FAMILIA DE LA CRUZ -->
+                        <div class="xcanon-family simple">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia De la Cruz</div>
+                                        <div class="xcanon-family-meta">cine / glamour / identidad performativa</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">fashion</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember"><strong>Luna La</strong><span>21-22 años</span><span style="font-size: smaller;">Modelo, estilista y creadora de tendencias. FC: Zion Moreno o libre. Personaje trans.</span></div>
+                                    <div class="xmember"><strong>X De la Cruz</strong><span>14-17 años</span><span style="font-size: smaller;">Hermano/a menor o medio hermano/a de Luna. Estudiante en Constance-St. Jude’s. FC libre. Origen latinoamericano.</span></div>
+                                    <div class="xmember"><strong>X De la Cruz</strong><span>18-40 años</span><span style="font-size: smaller;">Primo/a o tío/a de Luna. Ocupación libre. FC libre. Origen latinoamericano.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAMILIA WOLFE -->
+                        <div class="xcanon-family simple">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Wolfe</div>
+                                        <div class="xcanon-family-meta">broadway / lujo / hedonismo</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">elite</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember reserved"><strong>Max Wolfe</strong><span>21-22 años · reservado</span><span style="font-size: smaller;">Hijo de Gideon y Roy. Modelo ocasional, hedonista profesional o estudiante universitario. FC: Thomas Doherty o libre.</span></div>
+                                    <div class="xmember"><strong>X Wolfe</strong><span>14-26 años</span><span style="font-size: smaller;">Primo/a de Max. Ocupación libre. FC libre.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAMILIA KELLER -->
+                        <div class="xcanon-family simple">
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Keller</div>
+                                        <div class="xcanon-family-meta">estigma / prisión / becados</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">fallout</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember"><strong>X Keller</strong><span>18-40 años</span><span style="font-size: smaller;">Hermano/a de Kate Keller. Puede estar en la universidad o trabajar para familias de la élite. FC libre.</span></div>
+                                    <div class="xmember"><strong>X Keller</strong><span>14-18 años</span><span style="font-size: smaller;">Hermano/a o sobrino/a de Kate Keller. Estudiante becado en Constance-St. Jude’s. FC libre.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAMILIA BARNES -->
+                        <div class="xcanon-family simple">   
+                            <div class="xcanon-family-body">
+                                <div class="xcanon-family-top">
+                                    <div>
+                                        <div class="xcanon-family-name">Familia Barnes</div>
+                                        <div class="xcanon-family-meta">dinero viejo / despreocupación / amistad con zoya</div>
+                                    </div>
+                                    <div class="xcanon-family-badge">old money</div>
+                                </div>
+                                <div class="xcanon-members">
+                                    <div class="xmember"><strong>Shan Barnes</strong><span>18-20 años</span><span style="font-size: smaller;">Artista, musa, activista de sofá o libre. FC: Grace Duah o libre. Debe ser afroamericana.</span></div>
+                                    <div class="xmember"><strong>X Barnes</strong><span>14-17 años</span><span style="font-size: smaller;">Hermano menor de Shan. Estudiante en Constance-St. Jude’s. FC libre. Debe ser afroamericano.</span></div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div> <!-- FIN xcanon-familylist -->
+                </div> <!-- FIN CLUSTER 2: THE REBOOT -->
+                <!-- CLUSTER 3: OTROS PERSONAJES -->
+            <div class="xcanon-pane xcanon-pane-otros">
+                <div class="xcanon-cluster-head">
+                    <div><strong>Otros personajes</strong> <span>figuras vinculadas al universo gossip girl fuera de los núcleos familiares principales</span></div>   
+                    <em>cluster 03</em> 
+                </div>
+                <div class="xcanon-members xcanon-members-alone">
+                    <div class="xmember"><strong>Damien Dalgaard</strong> <span>35-36 años</span> <span style="font-size: smaller;">Hijo del embajador de Bélgica. Ex de Jenny / Eric. Empresario internacional, diplomático o figura en los márgenes de la ley. FC: Kevin Zegers o libre.</span></div>
+                    <div class="xmember"><strong>Olivia Burke</strong> <span>34-35 años</span> <span style="font-size: smaller;">Exnovia de Dan Humphrey. Estrella de cine, productora o retirada del espectáculo. FC: Hilary Duff o libre.</span></div>
+                    <div class="xmember"><strong>Steven Spence</strong> <span>45-50 años</span> <span style="font-size: smaller;">Padre de Sage Spence. Empresario. FC libre.</span></div>
+                    <div class="xmember"><strong>Sage Spence</strong> <span>27-28 años</span> <span style="font-size: smaller;">Ex Queen B de Constance y modelo. Puede ser diseñadora, influencer o estar ligada al mundo de la moda. FC: Sofia Black-D’Elia o libre.</span></div>
+                    <div class="xmember"><strong>Raina Thorpe</strong> <span>35-36 años</span> <span style="font-size: smaller;">Empresaria y ejecutiva en Thorpe Enterprises. FC: Tika Sumpter o libre. Debe ser afroamericana.</span></div>
+                    <div class="xmember"><strong>Diana Payne</strong> <span>55-60 años</span> <span style="font-size: smaller;">Magnate de medios de comunicación y gurú editorial. FC: Elizabeth Hurley o libre.</span></div>
+                    <div class="xmember"><strong>Colin Forrester</strong> <span>40-45 años</span> <span style="font-size: smaller;">Primo de Juliet Sharp y Ben Donovan. Ex profesor de Columbia y empresario millonario. FC: Sam Page o libre.</span></div>
+                    <div class="xmember"><strong>Juliet Sharp</strong> <span>35-36 años</span> <span style="font-size: smaller;">Prima de Colin Forrester. Ex antagonista. Puede estar redimida o seguir moviendo fichas desde las sombras. FC: Katie Cassidy o libre.</span></div> 
+                    <div class="xmember"><strong>Agnes Andrews</strong> <span>34-35 años</span> <span style="font-size: smaller;">Ex modelo. Antigua amiga y luego enemiga de Jenny Humphrey. FC: Willa Holland o libre.</span></div>
+                    <div class="xmember"><strong>Hazel Williams</strong> <span>35-36 años</span> <span style="font-size: smaller;">Una de las antiguas minions de Blair Waldorf. Ocupación a definir. FC: Dreama Walker o libre.</span></div>
+                    <div class="xmember"><strong>Penelope Shafai</strong> <span>35-36 años</span> <span style="font-size: smaller;">Ex minion de Blair. Puede ser abogada, ejecutiva o haberse casado con algún heredero. FC: Amanda Setton o libre.</span></div>
+                    <div class="xmember"><strong>Poppy Lifton</strong> <span>38-40 años</span> <span style="font-size: smaller;">Socialité devenida en estafadora de alto nivel. Puede estar rehabilitada o preparando el próximo golpe. FC: Tamara Feldman o libre.</span></div>
+                    <div class="xmember"><strong>Gabriel Edwards</strong> <span>40-45 años</span> <span style="font-size: smaller;">Estafador y falso emprendedor tecnológico. Puede estar rehabilitado o preparando otro golpe. FC libre.</span></div>
+                </div>
+            </div> <!-- FIN xcanon-pane-otros -->
+                                
+        </div> <!-- FIN xcanon-content -->
+                                
+        <!-- PIE DE LA APP CANON -->
+        <div class="xcanon-footer"> 
+            <strong>xoxo, gossip girl</strong> <span>Los personajes canon y semicanon pueden ser reinterpretados mientras conserven sus ejes narrativos y sus conexiones con el universo.</span> 
+        </div>
+    </div> <!-- FIN xcanon-phone -->
+</div> <!-- FIN xcanon-wrap -->
+</div> <!-- FIN xgb-pane-canon -->
+
+<!-- ========================================== -->
+<!-- PESTAÑA GUÍA NUEVOS USUARIOS               -->
+<!-- ========================================== -->
+<div class="xgb-pane xgb-pane-guia">
+    
+    <!-- CABECERA DE LA PÁGINA -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--color2); padding-top: 12px; margin-bottom: 25px; width: 100%;">
+        <div style="display: flex; align-items: flex-end; gap: 12px;">
+            <div class="xgb-page-icon" style="font-size: 22px; color: var(--xgb-accent); line-height: 100%; margin-bottom: 2px;">
+                ?
+            </div>
+            <div class="xgb-page-title" style="font-family: var(--fuente2); font-size: 26px; text-transform: uppercase; color: #ffffff; letter-spacing: 1px; line-height: 100%;">
+                Guía nuevos usuarios
+            </div>
+        </div>
+        <div class="xgb-page-sub" style="font-family: var(--fuente1); font-size: 10px; text-transform: uppercase; color: var(--xgb-accent); letter-spacing: 3px; font-weight: 600; line-height: 100%;">
+            primeros pasos / ruta sugerida
+        </div>
+    </div>
+
+    <!-- IMAGEN DESTACADA -->
+    <div class="xgb-big-img" style="border: var(--borde2); border-radius: 8px; overflow: hidden; height: 260px; margin-bottom: 16px;">
+        <img alt="Guía" src="https://2img.net/i.imgur.com/33sofpI.png" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+    </div>
+
+    <!-- CARDS DE PASOS EN GRID -->
+    <div class="xgb-mini-cards" style="display: grid; grid-template-columns: repeat(3, 12fr); gap: 15px;">
+        <!-- PASO 1 -->
+        <div class="xgb-mini-card" style="background: rgba(255,255,255,0.02); border: var(--borde1); border-radius: 8px; padding: 20px; box-sizing: border-box;">
+            <div class="xgb-mini-icon" style="font-family: var(--fuente2); font-size: 32px; color: var(--xgb-accent); opacity: 0.4; line-height: 100%; margin-bottom: 12px;">01</div>
+            <div class="xgb-mini-title" style="font-family: var(--fuente2); font-size: 15px; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Lee la normativa</div>
+            <div class="xgb-mini-text" style="font-family: var(--fuente1); font-size: 12px; color: rgba(255,255,255,0.6); line-height: 150%;">Antes de comenzar, revisa las normas de convivencia, el sistema de dados y las pautas generales de rol de nuestra comunidad.</div>
+        </div>
+        <!-- PASO 2 -->
+        <div class="xgb-mini-card" style="background: rgba(255,255,255,0.02); border: var(--borde1); border-radius: 8px; padding: 20px; box-sizing: border-box;">
+            <div class="xgb-mini-icon" style="font-family: var(--fuente2); font-size: 32px; color: var(--xgb-accent); opacity: 0.4; line-height: 100%; margin-bottom: 12px;">02</div>
+            <div class="xgb-mini-title" style="font-family: var(--fuente2); font-size: 15px; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Revisa registros</div>
+            <div class="xgb-mini-text" style="font-family: var(--fuente1); font-size: 12px; color: rgba(255,255,255,0.6); line-height: 150%;">Asegúrate de comprobar la lista de físicos ocupados, las familias disponibles y los cupos canon antes de armar tu ficha.</div>
+        </div>
+        <!-- PASO 3 -->
+        <div class="xgb-mini-card" style="background: rgba(255,255,255,0.02); border: var(--borde1); border-radius: 8px; padding: 20px; box-sizing: border-box;">
+            <div class="xgb-mini-icon" style="font-family: var(--fuente2); font-size: 32px; color: var(--xgb-accent); opacity: 0.4; line-height: 100%; margin-bottom: 12px;">03</div>
+            <div class="xgb-mini-title" style="font-family: var(--fuente2); font-size: 15px; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Crea personaje</div>
+            <div class="xgb-mini-text" style="font-family: var(--fuente1); font-size: 12px; color: rgba(255,255,255,0.6); line-height: 150%;">Completa el modelo de ficha oficial y publícalo en la sección correspondiente para que la administración evalúe y apruebe tu perfil.</div>
+        </div>
+    </div>
+
+    <!-- RECOMENDACIONES -->
+    <div style="margin-top: 16px;" class="xgb-block">
+        <div class="xgb-block-head">
+            <div class="xgb-block-title">Recomendaciones</div>
+            <div class="xgb-block-sub">ayuda rápida</div>
+        </div>
+        <div class="xgb-text">
+            <ul> 
+                <li><strong>Búsquedas activas:</strong> Pásate por la zona de búsquedas; muchos usuarios tienen tramas clave esperándote.</li>
+                <li><strong>Canales oficiales:</strong> Únete al servidor de Discord para una integración inmediata y resolver dudas en tiempo real con el staff.</li>
+                <li><strong>Reservas de PB:</strong> Recuerda que dispones de un tiempo limitado para mantener reservado tu avatar antes de subir la ficha.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- ========================================== -->
+            <!-- PESTAÑA SISTEMAS                           -->
+            <!-- ========================================== -->
+            <div class="xgb-pane xgb-pane-sistemas">
+                
+                <!-- CABECERA DE LA PÁGINA -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--color2); padding-top: 12px; margin-bottom: 25px; width: 100%;">
+                    <div style="display: flex; align-items: flex-end; gap: 12px;">
+                        <div class="xgb-page-icon" style="font-size: 22px; color: var(--xgb-accent); line-height: 100%; margin-bottom: 2px;">
+                            ☷
+                        </div>
+                        <div class="xgb-page-title" style="font-family: var(--fuente2); font-size: 26px; text-transform: uppercase; color: #ffffff; letter-spacing: 1px; line-height: 100%;">
+                            Sistemas
+                        </div>
+                    </div>
+                    <div class="xgb-page-sub" style="font-family: var(--fuente1); font-size: 10px; text-transform: uppercase; color: var(--xgb-accent); letter-spacing: 3px; font-weight: 600; line-height: 100%;">
+                        mecánicas / dados / progresión
+                    </div>
+                </div>
+
+                <!-- BLOQUES DE SISTEMA BASE Y PROGRESIÓN -->
+                <div class="xgb-grid-2">
+                    <div class="xgb-block">
+                        <div class="xgb-block-head">
+                            <div class="xgb-block-title">Sistema base</div>
+                            <div class="xgb-block-sub">dados</div> 
+                        </div>
+                        <div class="xgb-text"> 
+                            <p>El destino de tus secretos y tu estatus social no siempre está bajo tu control. Nuestro sistema de dados determina el éxito o fracaso de las acciones arriesgadas, los rumores que intentas esparcir y las confrontaciones directas en los eventos de la alta sociedad.</p> 
+                        </div> 
+                    </div>
+                    <div class="xgb-block">
+                        <div class="xgb-block-head">
+                            <div class="xgb-block-title">Progresión</div>
+                            <div class="xgb-block-sub">avance</div>
+                        </div>
+                        <div class="xgb-text"> 
+                            <p>A medida que participes en las tramas globales, acumularás influencia. La influencia te permitirá escalar desde ser un simple aspirante o un becado invisible hasta convertirte en el rey o reina del Upper East Side, desbloqueando beneficios narrativos exclusivos.</p> 
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAJA DE LISTA: ACCIONES COMUNES -->
+                <div style="margin-top: 16px;" class="xgb-listbox">
+                    <div class="xgb-list-title" style="font-family: var(--fuente2); font-size: 16px; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; border-left: 3px solid var(--xgb-accent); padding-left: 10px;">Acciones comunes</div>
+                    <ol style="font-family: var(--fuente1); font-size: 13px; color: rgba(255,255,255,0.7); padding-left: 20px; line-height: 170%;">
+                        <li style="margin-bottom: 6px;">Lanzar dados según la dificultad establecida por la narración o el staff en las tramas.</li>
+                        <li style="margin-bottom: 6px;">Aplicar modificadores basados en los rasgos de tu personaje, objetos adquiridos o el contexto de la escena.</li>
+                        <li>Registrar las consecuencias narrativas dentro del tema correspondiente para que afecten a tu reputación general.</li>
+                    </ol>
+                </div>
+            </div> <!-- FIN PESTAÑA SISTEMAS -->
+            
+        </div> <!-- FIN xgb-content -->
+        
+        <!-- PIE DE LA TABLILLA PRINCIPAL -->
+        <div class="xgb-footer"> 
+            <div>xoxo, next gen</div>
+            <div>guidebook oficial</div> 
+        </div>
+    </div> <!-- FIN xgb-main -->
+</div> <!-- FIN DE LA CAJA MAESTRA xoxo-guide -->
+
+<!-- SCRIPTS DE NAVEGACIÓN -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Control de Pestañas Principales de la Guía
+        const mainTabs = document.querySelectorAll('.xgb-tab');
+        const mainPanes = document.querySelectorAll('.xgb-pane');
+
+        mainTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetPane = tab.getAttribute('data-pane');
+                
+                mainTabs.forEach(t => t.classList.remove('active'));
+                mainPanes.forEach(p => p.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const activePane = document.querySelector(`.xgb-pane-${targetPane}`);
+                if(activePane) activePane.classList.add('active');
+            });
+        });
+
+        // 2. Control de Sub-Pestañas del Teléfono (Cánones)
+        const canonTabs = document.querySelectorAll('.xcanon-tab');
+        const canonPanes = document.querySelectorAll('.xcanon-pane');
+
+        canonTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetCluster = tab.getAttribute('data-cluster');
+                
+                canonTabs.forEach(t => t.classList.remove('active'));
+                canonPanes.forEach(p => p.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const activeCluster = document.querySelector(`.xcanon-pane-${targetCluster}`);
+                if(activeCluster) activeCluster.classList.add('active');
+            });
+        });
+    });
+</script>
+    
+</body>
+</html>
+
