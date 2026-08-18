@@ -5,27 +5,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guidebook - Aetheria</title>
     <style>  /* Variables de Color (Inspiradas en paleta fantástica/cósmica) */
-  .aetheria-gb {
+  /* ==================================================
+   AETHERIA GUIDEBOOK — SISTEMA DE TEMAS
+   ================================================== */
+
+/* --------------------------
+   MODO OSCURO — PREDETERMINADO
+-------------------------- */
+
+.aetheria-gb {
     --bg-dark: #12121a;
     --bg-panel: #191724;
     --bg-card: #2a2738;
+
     --accent-blue: #5a7fa8;
     --accent-purple: #a371a9;
     --accent-indigo: #7b75b8;
+
     --text-light: #f7f3ff;
     --text-muted: #c1b9ce;
-    --gradient-main: linear-gradient(135deg, #5a7fa8, #a371a9);
+    --cover-overlay: rgba(18, 18, 26, 0.20);
+    --border-color: rgba(163, 113, 169, 0.20);
     
+    --shadow-color: rgba(0, 0, 0, 0.50);
+
+    --nav-hover: rgba(163, 113, 169, 0.15);
+    --nav-item-bg: rgba(255, 255, 255, 0.03);
+    --gradient-main:
+        linear-gradient(
+            135deg,
+            #5a7fa8,
+            #a371a9
+        );
+
     max-width: 1100px;
     margin: 20px auto;
+
     background-color: var(--bg-dark);
     color: var(--text-light);
+
     font-family: 'Quicksand', sans-serif;
+
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    border: 1px solid rgba(163, 113, 169, 0.2);
-  }
+
+    box-shadow:
+        0 10px 30px var(--shadow-color);
+
+    border:
+        1px solid var(--border-color);
+
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease;
+}
+
+
+/* --------------------------
+   MODO CLARO
+-------------------------- */
+
+.aetheria-gb.theme-light {
+
+    /* Fondos */
+    --bg-dark: #f6f1e8;
+    --bg-panel: #eee7dc;
+    --bg-card: #fdf9f1;
+
+    /* Acentos */
+    --accent-blue: #5a7fa8;
+    --accent-purple: #a371a9;
+    --accent-indigo: #7b75b8;
+
+    /* Texto */
+    --text-light: #302a3a;
+    --text-muted: #665d70;
+    --cover-overlay: rgba(246, 241, 232, 0.18);
+    /* Bordes y sombras */
+    --border-color: rgba(123, 117, 184, 0.28);
+
+    --shadow-color: rgba(48, 42, 58, 0.18);
+
+    /* Navegación */
+    --nav-hover: rgba(163, 113, 169, 0.15);
+    --nav-item-bg: rgba(48, 42, 58, 0.04);
+    /* Gradiente principal */
+    --gradient-main:
+        linear-gradient(
+            135deg,
+            #6688b4,
+            #a575aa
+        );
+}
+		
+		/* BOTÓN DE CAMBIO DE TEMA */
+
+.gb-theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid rgba(163, 113, 169, 0.35);
+    border-radius: 50%;
+
+    background: #191724;
+    color: #f7f3ff;
+
+    font-size: 1.25rem;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.25);
+
+    z-index: 9999;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease;
+}
+
+.gb-theme-toggle:hover {
+    transform: rotate(20deg) scale(1.08);
+}
+
+/* BOTÓN EN MODO CLARO */
+
+.theme-light ~ * .gb-theme-toggle,
+body:has(.aetheria-gb.theme-light) .gb-theme-toggle {
+    background: #fdf9f1;
+    color: #302a3a;
+}
 
   /* Ocultar los radio inputs */
   .aetheria-gb input[type="radio"] {
@@ -46,7 +163,7 @@
     flex: 1 1 calc(20% - 8px);
     min-width: 120px;
     padding: 10px 8px;
-    background: rgba(255,255,255,0.03);
+    background: var(--nav-item-bg);
     color: var(--text-muted);
     text-align: center;
     font-size: 0.82rem;
@@ -123,7 +240,7 @@
   /* Portada */
   .gb-cover {
     height: 480px;
-    background: linear-gradient(to bottom, rgba(18,18,26,0.2), var(--bg-dark)), 
+    background: linear-gradient(to bottom, var(--cover-overlay), var(--bg-dark)), 
                 url('https://2img.net/i.imgur.com/dh5I4cE.png') center/cover;
     display: flex;
     flex-direction: column;
@@ -224,6 +341,11 @@
 </style>
 </head>
 <body>
+
+<button class="gb-theme-toggle" id="gb-theme-toggle" type="button" aria-label="Cambiar modo de color">
+    <span class="gb-theme-icon">☀</span>
+</button>
+
 <div class="aetheria-gb">
 	  
 	<!--  Radio Controls para Pestañas  -->  <input checked="" id="tab-home" name="gb-tabs" type="radio" />  <input id="tab-about" name="gb-tabs" type="radio" />  <input id="tab-rules" name="gb-tabs" type="radio" />  <input id="tab-guide" name="gb-tabs" type="radio" />  <input id="tab-groups" name="gb-tabs" type="radio" />  <input id="tab-ranks" name="gb-tabs" type="radio" />  <input id="tab-systems" name="gb-tabs" type="radio" />  <input id="tab-badges" name="gb-tabs" type="radio" />  <input id="tab-search-1v1" name="gb-tabs" type="radio" />  <input id="tab-search-team" name="gb-tabs" type="radio" />  <input id="tab-search-squad" name="gb-tabs" type="radio" />   
@@ -655,6 +777,49 @@
 		   
 	</div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const guidebook = document.querySelector('.aetheria-gb');
+    const botonTema = document.getElementById('gb-theme-toggle');
+    const iconoTema = botonTema.querySelector('.gb-theme-icon');
+
+    /* Recuperar preferencia guardada */
+    const temaGuardado = localStorage.getItem('aetheria-guidebook-theme');
+
+    if (temaGuardado === 'light') {
+        guidebook.classList.add('theme-light');
+        iconoTema.textContent = '🌙';
+    }
+
+    /* Cambiar tema */
+    botonTema.addEventListener('click', function () {
+
+        guidebook.classList.toggle('theme-light');
+
+        if (guidebook.classList.contains('theme-light')) {
+
+            localStorage.setItem(
+                'aetheria-guidebook-theme',
+                'light'
+            );
+
+            iconoTema.textContent = '🌙';
+
+        } else {
+
+            localStorage.setItem(
+                'aetheria-guidebook-theme',
+                'dark'
+            );
+
+            iconoTema.textContent = '☀';
+
+        }
+
+    });
+
+});
 </script>
     
 </body>
