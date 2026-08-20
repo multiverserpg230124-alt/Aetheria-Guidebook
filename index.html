@@ -1,34 +1,38 @@
+ <link href="https://fonts.googleapis.com/css2?family=Alata&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://dl.dropbox.com/s/zfrx5kq7m5ijodd/fontsmaer.css" rel="stylesheet" />
+  <link href="https://dl.dropbox.com/s/5q0tr9f3yulbdwd/lolmapus.css" rel="stylesheet" />
+  <link href="//solrainha.github.io/saturnicons/saturnicons.css" rel="stylesheet" />
+  <link href="//solrainha.github.io/honeybee/honeybee.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" />
+  <link rel="stylesheet" href="https://nagoshiashumari.github.io/Rpg-Awesome/stylesheets/rpg-awesome.min.css" />
+  <link rel="stylesheet" href="https://cloudflare.com"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://necodemancer.github.io/skins/iconfonts/game-icons/game-icons.css"><link rel="stylesheet" href="https://cloudflare.com"><link rel="stylesheet" href="//dl.dropbox.com/s/uw6kyypbcw9hb3j/icofont.min.css" /><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Fleur+De+Leah&family=Grenze+Gotisch:wght@100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Quicksand:wght@400;600&display=swap" /> 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guidebook - Aetheria</title>
-    <style>  /* Variables de Color (Inspiradas en paleta fantástica/cósmica) */
-  /* ==================================================
-   AETHERIA GUIDEBOOK — SISTEMA DE TEMAS
-   ================================================== */
-
-/* --------------------------
-   MODO OSCURO — PREDETERMINADO
--------------------------- */
+    <title>Codex Multiversal - Aetheria</title>
+    <style>  
+/* AETHERIA GUIDEBOOK — SISTEMA DE TEMAS */
+/* MODO OSCURO — PREDETERMINADO */
 
 .aetheria-gb {
     --bg-dark: #12121a;
     --bg-panel: #191724;
     --bg-card: #2a2738;
-
     --accent-blue: #5a7fa8;
     --accent-purple: #a371a9;
     --accent-indigo: #7b75b8;
-
     --text-light: #f7f3ff;
     --text-muted: #c1b9ce;
     --cover-overlay: rgba(18, 18, 26, 0.20);
     --border-color: rgba(163, 113, 169, 0.20);
-    
     --shadow-color: rgba(0, 0, 0, 0.50);
-
     --nav-hover: rgba(163, 113, 169, 0.15);
     --nav-item-bg: rgba(255, 255, 255, 0.03);
     --gradient-main:
@@ -37,60 +41,39 @@
             #5a7fa8,
             #a371a9
         );
-
     max-width: 1100px;
     margin: 20px auto;
-
     background-color: var(--bg-dark);
     color: var(--text-light);
-
     font-family: 'Quicksand', sans-serif;
-
     border-radius: 12px;
     overflow: hidden;
-
     box-shadow:
         0 10px 30px var(--shadow-color);
-
     border:
         1px solid var(--border-color);
-
     transition:
         background-color 0.35s ease,
         color 0.35s ease,
         border-color 0.35s ease;
 }
-
-
-/* --------------------------
-   MODO CLARO
--------------------------- */
-
+		
+/* MODO CLARO */
+		
 .aetheria-gb.theme-light {
-
-    /* Fondos */
     --bg-dark: #f6f1e8;
     --bg-panel: #eee7dc;
     --bg-card: #fdf9f1;
-
-    /* Acentos */
     --accent-blue: #5a7fa8;
     --accent-purple: #a371a9;
     --accent-indigo: #7b75b8;
-
-    /* Texto */
     --text-light: #302a3a;
     --text-muted: #665d70;
     --cover-overlay: rgba(246, 241, 232, 0.18);
-    /* Bordes y sombras */
     --border-color: rgba(123, 117, 184, 0.28);
-
     --shadow-color: rgba(48, 42, 58, 0.18);
-
-    /* Navegación */
     --nav-hover: rgba(163, 113, 169, 0.15);
     --nav-item-bg: rgba(48, 42, 58, 0.04);
-    /* Gradiente principal */
     --gradient-main:
         linear-gradient(
             135deg,
@@ -99,56 +82,43 @@
         );
 }
 		
-		/* BOTÓN DE CAMBIO DE TEMA */
+/* BOTÓN DE CAMBIO DE TEMA */
 
 .gb-theme-toggle {
     position: fixed;
     top: 20px;
     right: 20px;
-
     width: 46px;
     height: 46px;
-
     border: 1px solid rgba(163, 113, 169, 0.35);
     border-radius: 50%;
-
     background: #191724;
     color: #f7f3ff;
-
     font-size: 1.25rem;
     cursor: pointer;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     box-shadow: 0 5px 20px rgba(0,0,0,.25);
-
     z-index: 9999;
-
     transition:
         background .3s ease,
         color .3s ease,
         transform .3s ease;
 }
-
 .gb-theme-toggle:hover {
     transform: rotate(20deg) scale(1.08);
 }
-
 /* BOTÓN EN MODO CLARO */
-
 .theme-light ~ * .gb-theme-toggle,
 body:has(.aetheria-gb.theme-light) .gb-theme-toggle {
     background: #fdf9f1;
     color: #302a3a;
 }
-
   /* Ocultar los radio inputs */
   .aetheria-gb input[type="radio"] {
     display: none;
   }
-
   /* Navegación por pestañas */
   .aetheria-gb .gb-nav {
     display: flex;
@@ -158,7 +128,6 @@ body:has(.aetheria-gb.theme-light) .gb-theme-toggle {
     padding: 5px;
     gap: 4px;
   }
-
   .aetheria-gb .gb-nav label {
     flex: 1 1 calc(20% - 8px);
     min-width: 120px;
@@ -176,12 +145,10 @@ body:has(.aetheria-gb.theme-light) .gb-theme-toggle {
     justify-content: center;
     gap: 8px;
   }
-
   .aetheria-gb .gb-nav label:hover {
     background: rgba(163, 113, 169, 0.15);
     color: var(--text-light);
   }
-
   /* Pestaña Activa */
   #tab-home:checked ~ .gb-nav label[for="tab-home"],
   #tab-about:checked ~ .gb-nav label[for="tab-about"],
@@ -198,13 +165,11 @@ body:has(.aetheria-gb.theme-light) .gb-theme-toggle {
     color: #fff;
     box-shadow: 0 2px 10px rgba(163, 113, 169, 0.4);
   }
-
   /* Contenido de las Secciones */
   .aetheria-gb .gb-content {
     padding: 25px;
     min-height: 500px;
   }
-
   .aetheria-gb .tab-panel {
     display: none;
     animation: fadeIn 0.4s ease forwards;
@@ -359,39 +324,30 @@ body:has(.aetheria-gb.theme-light) .gb-theme-toggle {
 		         
 		<!--  PORTADA  -->    
 		<div id="panel-home" class="tab-panel">
-			      
 			<div class="gb-cover">
-				        
 				<h1>
 					Aetheria
 				</h1>
-				        
 				<p>
 					Foro de Rol Libre
-				</p>
-				      
+				</p> 
 			</div>
-			    
 		</div>
-		     
 		<!--  1. QUÉ ES AETHERIA  -->    
-		<div id="panel-about" class="tab-panel">
-			      
+		<div id="panel-about" class="tab-panel">    
 			<h2>
-				<em class="fa-solid fa-globe">
+				<em class="game-icon game-icon-galaxy">
 				</em> ¿Qué es Aetheria?
 			</h2>
 			      
 			<div class="media-box">
 				        <img alt="Aetheria World" src="https://picsum.photos/id/1015/300/200" />        
 				<p>
-					Aetheria es un espacio de rol interpretativo libre enfocado en la creatividad compartida. Aquí puedes dar vida a tus personajes en un multiverso en constante desarrollo.
-				</p>
-				      
+					Aetheria es un foro de rol libre creado con el fin de encontrar un espacio permanente, acogedor, con ambiente tranquilo y de respeto, en el cual poder desarrollar esas tramas que por alguna razón no han podido ser llevadas a cabo. En Aetheria podrás llevar todo tipo de historias, desde esas tramas 1x1 hasta grupales pequeños o grandes, todo en un solo lugar, con FC animados o reales, cualquier trama ya sea fantasía, aventura, terror, amor será bienvenida, siempre respetando y cumpliendo la normativa correspondiente. 
+				</p>    
 			</div>
-			      
 			<h3>
-				<em class="fa-solid fa-atom">
+				<em class="game-icon game-icon-solar-system">
 				</em> Definiciones Importantes
 			</h3>
 			      
