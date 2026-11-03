@@ -734,48 +734,55 @@ body:has(.aetheria-gb.theme-light) .gb-theme-toggle {
 	</div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+  (function () {
+    const origenForo = 'https://aetheria-rpg-prueb.foroactivo.com';
 
-    const guidebook = document.querySelector('.aetheria-gb');
-    const botonTema = document.getElementById('gb-theme-toggle');
-    const iconoTema = botonTema.querySelector('.gb-theme-icon');
+    function iniciarGuidebook() {
+      const guidebook = document.querySelector('.aetheria-gb');
+      const botonTema = document.getElementById('gb-theme-toggle');
 
-    /* Recuperar preferencia guardada */
-    const temaGuardado = localStorage.getItem('aetheria-guidebook-theme');
+      /* Elimina el botón propio de la guidebook. */
+      if (botonTema) {
+        botonTema.remove();
+      }
 
-    if (temaGuardado === 'light') {
-        guidebook.classList.add('theme-light');
-        iconoTema.textContent = '🌙';
-    }
+      if (!guidebook) {
+        return;
+      }
 
-    /* Cambiar tema */
-    botonTema.addEventListener('click', function () {
+      /* Aplica el modo que envía el foro. */
+      function aplicarTema(esClaro) {
+        guidebook.classList.toggle('theme-light', esClaro);
+      }
 
-        guidebook.classList.toggle('theme-light');
-
-        if (guidebook.classList.contains('theme-light')) {
-
-            localStorage.setItem(
-                'aetheria-guidebook-theme',
-                'light'
-            );
-
-            iconoTema.textContent = '☽';
-
-        } else {
-
-            localStorage.setItem(
-                'aetheria-guidebook-theme',
-                'dark'
-            );
-
-            iconoTema.textContent = '☀';
-
+      /* Recibe claro u oscuro desde Foroactivo. */
+      window.addEventListener('message', function (evento) {
+        if (
+          evento.origin !== origenForo ||
+          !evento.data ||
+          evento.data.tipo !== 'aetheria-guidebook-tema'
+        ) {
+          return;
         }
 
-    });
+        aplicarTema(evento.data.claro === true);
+      });
 
-});
+      /* Avisa que la guidebook está lista. */
+      if (window.parent !== window) {
+        window.parent.postMessage(
+          { tipo: 'aetheria-guidebook-lista' },
+          origenForo
+        );
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', iniciarGuidebook);
+    } else {
+      iniciarGuidebook();
+    }
+  })();
 </script>
     
 </body>
